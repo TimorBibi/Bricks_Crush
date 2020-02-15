@@ -42,14 +42,18 @@ export const pathFromBezierCurve = cubicBezierCurve => {
     return {x, y};
   };
   
-  const degreesToRadian = degrees => ((degrees * Math.PI) / 180);
+  export const degreesToRadian = degrees => ((degrees * Math.PI) / 180);
+  export const getRealAngle = angle => ((angle * -1) + 90);
   
-  export const calculateNextPosition = (x, y, angle, divisor = 300) => {
-    const realAngle = (angle * -1) + 90;
-    const stepsX = radiansToDegrees(Math.cos(degreesToRadian(realAngle))) / divisor;
-    const stepsY = radiansToDegrees(Math.sin(degreesToRadian(realAngle))) / divisor;
+  export const calculateNextPosition = (x, y, angle, gapSpace) => {
+    const realAngle = getRealAngle(angle);
+    // const stepsX = radiansToDegrees(Math.cos(degreesToRadian(realAngle))) / gapSpace;
+    // const stepsY = radiansToDegrees(Math.sin(degreesToRadian(realAngle))) / gapSpace;
+    const stepsX = gapSpace * Math.cos(degreesToRadian(realAngle));
+    const stepsY = gapSpace * Math.sin(degreesToRadian(realAngle));
+  
     return {
-      x: x +stepsX,
+      x: x + stepsX,
       y: y - stepsY,
     }
   };
@@ -62,3 +66,4 @@ export const pathFromBezierCurve = cubicBezierCurve => {
 export const hypotenuseCalc = (sideA, sideB) => {
     return Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2));
 }
+

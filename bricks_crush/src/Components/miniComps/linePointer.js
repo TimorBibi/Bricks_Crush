@@ -1,18 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  ballRadius,
-  gameHeight,
-  gameWidth,
-  linePointerLength
-} from "../../utils/constants";
+import { ballRadius, gameWidth } from "../../utils/constants";
 import { calculateNextPosition } from "../../utils/formulas";
+import { baseToWallByAngle } from "../../utils/functions";
 
 const LinePointer = props => {
   const baseX = props.basePosition.x;
-  const baseY = props.basePosition.y - ballRadius;
-  const circleRadius = ballRadius * 0.7;
-  const numberOfCircles = linePointerLength / circleRadius * 2;
+  const baseY = props.basePosition.y;
+  const circleRadius = ballRadius * 0.5;
+
+  const baseToWallLength = baseToWallByAngle(
+    props.basePosition,
+    props.angle,
+    circleRadius
+  );
+  const gapSpace = baseToWallLength / (circleRadius * 4);
+
+  const numberOfCircles = Math.floor((baseToWallLength * 1.6) / gapSpace);
+
   const circles = [];
 
   const circleStyle = {
@@ -38,7 +43,10 @@ const LinePointer = props => {
   };
 
   const newAngleByBorders = (angle, endPosition) => {
-    if (endPosition.x <= gameWidth / -2 || endPosition.x >= gameWidth / 2)
+    if (
+      endPosition.x - circleRadius <= gameWidth / -2 ||
+      endPosition.x + circleRadius >= gameWidth / 2
+    )
       return angle * -1;
     return angle;
   };
@@ -50,7 +58,7 @@ const LinePointer = props => {
       circlePos.x,
       circlePos.y,
       currAngle,
-      1.5
+      gapSpace
     );
     circles.push(createCircle(circlePos, i));
     currAngle = newAngleByBorders(currAngle, circlePos);

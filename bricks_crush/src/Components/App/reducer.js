@@ -1,19 +1,17 @@
 import { appConstants } from "./actions";
 import moveObjects from "./moveObjects";
+import { ballRadius } from "../../utils/constants";
 
 const initialGameState = {
   started: false,
-  kills: 0,
   balls: [],
-  currentPlayer: null,
-  players: null,
-  baseXPosition: 0
+  basePosition: { x: 0, y: -ballRadius },
+  angle: 90,
 };
 
 const appInitialState = {
-  angle: 45,
-  gameState: initialGameState,
-}
+  gameState: initialGameState
+};
 
 function appReducer(state = appInitialState, action) {
   switch (action.type) {

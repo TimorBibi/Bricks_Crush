@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { connect } from "react-redux";
-import PropTyoes from "prop-types";
+import PropTypes from "prop-types";
 import { appActions } from "./actions";
 import Canvas from "../Canvas/Canvas";
 import { getCanvasPosition } from "../../utils/formulas";
@@ -27,8 +27,7 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
   moveObjects: mousePosition => {
@@ -36,8 +35,6 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-App.propTypes = {
-
-};
+App.propTypes = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -11,7 +11,7 @@ const Canvas = props => {
 
   return (
     <svg
-      className="canvas"
+      className="game_canvas"
       id="bricks_crush_canvas"
       preserveAspectRatio="xMaxYMax none"
       viewBox={viewBox}
@@ -19,20 +19,25 @@ const Canvas = props => {
       onMouseMove={props.trackMouse}
     >
       <Ball position={{ x: 0, y: 0 }} />
-      <LinePointer basePosition={{ x: 0, y: 0 }} angle={props.angle} />
+      <LinePointer basePosition={props.basePosition} angle={props.angle} />
     </svg>
   );
 };
 
 const mapStateToProps = state => ({
-  angle: state.appReducer.angle
+  angle: state.appReducer.gameState.angle,
+  basePosition: state.appReducer.gameState.basePosition
 });
 
 const mapDispatchToProps = dispatch => ({});
 
 Canvas.propTypes = {
   trackMouse: PropTypes.func.isRequired,
-  angle: PropTypes.number.isRequired
+  angle: PropTypes.number.isRequired,
+  basePosition: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired
+  }).isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Canvas);

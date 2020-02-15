@@ -4,13 +4,13 @@ import { ballRadius } from "../../utils/constants";
 export default function moveObjects(state, action) {
   const { x, y } = action.mousePosition || { x: 0, y: 0 };
   const angle = calculateAngle(
-    state.gameState.baseXPosition,
+    state.gameState.basePosition.x,
     -ballRadius,
     x,
     y
   );
   return {
     ...state,
-    angle
+    gameState: {...state.gameState, angle}
   };
 }
