@@ -1,12 +1,3 @@
-export const appConstants = {
-    MOVE_OBJECTS: "MOVE_OBJECTS"
-}
+export const appConstants = {};
 
-const moveObjects = (mousePosition) => ({
-    type: appConstants.MOVE_OBJECTS,
-    mousePosition
-})
-
-export const appActions = {
-    moveObjects: moveObjects
-}
+export const appActions = {};

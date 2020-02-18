@@ -1,27 +1,21 @@
 import React from "react";
 import "./App.css";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { appActions } from "./actions";
+// import PropTypes from "prop-types";
+// import { Map } from "immutable";
+// import { appActions } from "./actions";
 import Canvas from "../Canvas/Canvas";
-import { getCanvasPosition } from "../../utils/formulas";
+// import { getCanvasPosition } from "../../utils/formulas";
 
 class App extends React.Component {
-  componentDidMount() {
-    const self = this;
-    setInterval(() => self.props.moveObjects(self.canvasMousePosition), 10);
-  }
-
-  trackMouse = event => {
-    this.canvasMousePosition = getCanvasPosition(event);
-  };
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     return (
       <div className="App">
-        <Canvas
-          trackMouse={event => this.trackMouse(event)}
-        />
+        <Canvas />
       </div>
     );
   }
@@ -29,11 +23,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => ({
-  moveObjects: mousePosition => {
-    dispatch(appActions.moveObjects(mousePosition));
-  }
-});
+const mapDispatchToProps = dispatch => ({});
 
 App.propTypes = {};
 
