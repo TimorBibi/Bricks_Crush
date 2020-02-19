@@ -9,7 +9,13 @@ const initialState = {
     angle: 90,
     ballsCount: 10,
     ballsInMove: List(),
-    ballsInBase: List()
+    ballsInBase: List(),
+    shooting: Map({
+      toShoot: 10,
+      shootAngle: 0,
+      lastToLeaveId: -1,
+    }),
+    ballsSpeed: 1,
   })
 };
 

@@ -1,7 +1,7 @@
 import { canvasConstants } from "./actions";
 import initialState from "../initialState";
 import { initBasePosition } from "../../utils/constants";
-import {List } from "immutable";
+import { List } from "immutable";
 import moveObjects from "./moveObjects";
 
 const initInBaseBalls = state => {
@@ -13,21 +13,25 @@ const initInBaseBalls = state => {
   return state.set("ballsInBase", inBase);
 };
 
-const shootBallHandler = (state, action) => {
-  const inBase = action.inBase;
+// const shootBallHandler = (state, action) => {
+//   const inBase = action.inBase;
 
-  if (inBase && inBase.count()) {
-    const ball = inBase.get(0);
+//   if (inBase && inBase.size) {
+//     const ball = inBase.get(0);
+//     ball.angle = action.angle;
 
-    ball.angle = action.angle;
+//     const newBallsInMove = state.get("ballsInMove").push(ball);
+//     const newBallsInBase = inBase.filter(currBall => currBall.id !== ball.id);
 
-    const newBallsInMove = state.get("ballsInMove").push(ball);
-    const newBallsInBase = inBase.filter(currBall => currBall.id !== ball.id);
+//     return state
+//       .set("ballsInMove", newBallsInMove)
+//       .set("ballsInBase", newBallsInBase);
+//   } else return state;
+// };
 
-    return state
-      .set("ballsInMove", newBallsInMove)
-      .set("ballsInBase", newBallsInBase);
-  } else return state;
+const toSootHandler = state => {
+  if (state.get("atBase")) return state.set("atBase", false);
+  return state;
 };
 
 function canvasReducer(state = initialState.canvas, action) {
@@ -37,7 +41,8 @@ function canvasReducer(state = initialState.canvas, action) {
     case canvasConstants.INIT_IN_BASE_BALLS:
       return initInBaseBalls(state);
     case canvasConstants.SHOOT_BALL:
-      return shootBallHandler(state, action);
+      return toSootHandler(state);
+    // return shootBallHandler(state, action);
     default:
       return state;
   }

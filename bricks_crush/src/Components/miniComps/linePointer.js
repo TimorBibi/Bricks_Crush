@@ -1,19 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ballRadius, gameWidth } from "../../utils/constants";
-import { calculateNextPosition } from "../../utils/formulas";
-import { baseToWallByAngle } from "../../utils/functions";
+import * as C from "../../utils/constants";
+import * as Forms from "../../utils/formulas";
+import *as Funcs from "../../utils/functions";
 
 const LinePointer = props => {
   const baseX = props.basePosition.x;
   const baseY = props.basePosition.y;
-  const circleRadius = ballRadius * 0.5;
+  const circleRadius = C.ballRadius * 0.5;
 
-  const baseToWallLength = baseToWallByAngle(
+  const baseToWallLength = Funcs.baseToWallByAngle(
     props.basePosition,
     props.angle,
     circleRadius
   );
+  // const baseToWallLength = C.gameWidth * 1;
   const gapSpace = baseToWallLength / (circleRadius * 4);
 
   const numberOfCircles = Math.floor((baseToWallLength * 1.6) / gapSpace);
@@ -44,23 +45,24 @@ const LinePointer = props => {
 
   const newAngleByBorders = (angle, endPosition) => {
     if (
-      endPosition.x - circleRadius <= gameWidth / -2 ||
-      endPosition.x + circleRadius >= gameWidth / 2
+      endPosition.x - circleRadius <= C.gameWidth / -2 ||
+      endPosition.x + circleRadius >= C.gameWidth / 2
     )
-      return angle * -1;
+      return Forms.mirrorAngleToY(angle);
     return angle;
   };
 
   let circlePos = { x: baseX, y: baseY };
   let currAngle = props.angle;
   for (let i = 0; i < numberOfCircles; i++) {
-    circlePos = calculateNextPosition(
+    circlePos = Forms.calculateNextPosition(
       circlePos.x,
       circlePos.y,
       currAngle,
       gapSpace
     );
     circles.push(createCircle(circlePos, i));
+    // currAngle = Funcs.calculateNewAngleByWall(circlePos, currAngle, circleRadius);
     currAngle = newAngleByBorders(currAngle, circlePos);
   }
 

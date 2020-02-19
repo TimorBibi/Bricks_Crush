@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import "./Canvas.css";
 import { canvasActions } from "./actions";
 import { gameHeight, gameWidth } from "../../utils/constants";
-import {getCanvasPosition} from "../../utils/formulas";
+import { getCanvasPosition } from "../../utils/formulas";
 import BallsContainer from "../Ball/BallsContainer";
 import LinePointer from "../miniComps/linePointer";
 
@@ -18,10 +18,13 @@ class Canvas extends React.Component {
   componentDidMount() {
     const self = this;
     self.props.initBaseBalls();
-    self.moveInterval = setInterval(() => self.props.moveObjects(self.canvasMousePosition), 10);
+    self.moveInterval = setInterval(
+      () => self.props.moveObjects(self.canvasMousePosition),
+      10
+    );
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     clearInterval(this.moveInterval);
   }
 
@@ -39,14 +42,19 @@ class Canvas extends React.Component {
         viewBox={viewBox}
         style={{ width: gameWidth, height: gameHeight }}
         onMouseMove={this.trackMouse}
-        onClick={() => this.props.shootBall(this.props.ballsInBase, this.props.angle)}
+        onClick={() =>
+          this.props.shootBall(this.props.ballsInBase, this.props.angle)
+        }
       >
         <BallsContainer
           ballsInBase={this.props.ballsInBase}
           ballsInMove={this.props.ballsInMove}
         />
         {this.props.atBase && (
-          <LinePointer basePosition={this.props.basePosition} angle={this.props.angle} />
+          <LinePointer
+            basePosition={this.props.basePosition}
+            angle={this.props.angle}
+          />
         )}
       </svg>
     );
@@ -64,7 +72,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  moveObjects: (mousePosition) => {
+  moveObjects: mousePosition => {
     dispatch(canvasActions.moveObjects(mousePosition));
   },
   initBaseBalls: () => {
