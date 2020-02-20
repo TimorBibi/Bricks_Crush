@@ -17,7 +17,7 @@ const LinePointer = props => {
   // const baseToWallLength = C.gameWidth * 1;
   const gapSpace = baseToWallLength / (circleRadius * 4);
 
-  const numberOfCircles = Math.floor((baseToWallLength * 1.6) / gapSpace);
+  const numberOfCircles = Math.floor((baseToWallLength + (C.gameWidth / 3)) / gapSpace);
 
   const circles = [];
 
