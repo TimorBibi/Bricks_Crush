@@ -49,6 +49,7 @@ class Canvas extends React.Component {
         <BallsContainer
           ballsInBase={this.props.ballsInBase}
           ballsInMove={this.props.ballsInMove}
+          basePosition={this.props.basePosition}
         />
         {this.props.atBase && (
           <LinePointer
