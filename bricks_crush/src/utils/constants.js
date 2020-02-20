@@ -9,3 +9,9 @@ export const ballType = Object.freeze({
   inMove: "InMove"
 });
 export const speeds = [0.5, 1, 2, 3, 4, 5, 6];
+export const bricksInRow = 12;
+export const bricksInColumn = (gameHeight * bricksInRow) / gameWidth;
+export const singleBrickSize = {
+  width: gameWidth / bricksInRow,
+  height: gameHeight / bricksInColumn
+};

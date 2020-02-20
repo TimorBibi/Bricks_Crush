@@ -8,6 +8,7 @@ import { gameHeight, gameWidth } from "../../utils/constants";
 import { getCanvasPosition } from "../../utils/formulas";
 import BallsContainer from "../Ball/BallsContainer";
 import LinePointer from "../miniComps/linePointer";
+import BricksContainer from "../Brick/BricksContainer";
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class Canvas extends React.Component {
             angle={this.props.angle}
           />
         )}
+        <BricksContainer />
       </svg>
     );
   }

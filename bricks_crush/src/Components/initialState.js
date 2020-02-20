@@ -16,6 +16,7 @@ const initialState = {
       lastToLeaveId: -1,
     }),
     ballsSpeed: 1,
+    bricks: List()
   })
 };
 
